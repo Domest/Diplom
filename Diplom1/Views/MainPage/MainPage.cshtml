@@ -1,0 +1,56 @@
+﻿@model TableViewModel
+
+<div class="scroll-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Груз</th>
+                <th>Услуга</th>
+                <th>Кол-во</th>
+                <th>Статус</th>
+                <th>Сумма, руб</th>
+                <th>Сумма, доллары США</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll-table-body">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Металл</td>
+                    <th>
+                        <details>
+                            <summary>Внимание, спойлер!</summary>
+                            <p>Убийца — дворецкий!</p>
+                            <p>Прокатка металла через что-то там</p>
+                        </details>
+                    </th>
+                    <td>15 т</td>
+                    <td>Выполняется</td>
+                    <td>1488 руб</td>
+                    <td>288 долл</td>
+                </tr>
+                @{
+                    foreach (Request req in Model.AllServices)
+                    {
+                        <tr>
+                            <td>Алюминий</td>
+                            <th>
+                                <details>
+                                    <summary>Внимание, спойлер!</summary>
+                                    <p>Убийца — дворецкий!</p>
+                                    <p>Прокатка металла через что-то там</p>
+                                </details>
+                            </th>
+                            <td>@req.CargoAmount</td>
+                            <td>@req.Status</td>
+                            <td>@req.TotalSumRub</td>
+                            <td>@req.TotalSumUsd</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
