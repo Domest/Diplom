@@ -12,6 +12,13 @@ namespace Diplom1.Models
         [NotMapped]
         public int BackId { get; set; }
         public string Name { get; set; }
-        public List<Service> PossibleServices { get; set; }
+        
+        public ICollection<Request> Reqs { get; set; }
+        public ICollection<Service> PossibleServices { get; set; }
+        public CargoObject()
+        {
+            PossibleServices = new List<Service>();
+            Reqs = new List<Request>();
+        }
     }
 }

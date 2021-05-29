@@ -1,0 +1,20 @@
+﻿@model CreateRequestViewModel
+
+<p>
+    ЕБАНАЯ ЕБАНИНАИ БЛЯТЬ КАК ЖЕ ЭТО ВСЁ ЗАЕБАЛО НАХУЙ
+</p>
+@Html.DropDownList("userid", ViewBag.Users as SelectList, new { @onchange = "selectChanged(this.value)" })
+<p>
+</p>
+<form asp-controller="AddReq" asp-action="Index" method="post">
+    <input type="submit" class="create-request-button" name="openmodal" value="selected" />
+</form>
+
+<script type="text/javascript">
+    function selectChanged(value) {
+        fetch(`zhopa?value=${value}`)
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert(error))
+    }
+</script>

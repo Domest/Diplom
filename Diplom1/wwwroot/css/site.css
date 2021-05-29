@@ -108,3 +108,61 @@ body {
 .scroll-table tbody tr:nth-child(even) {
     background: #f3f3f3;
 }
+
+.create-request-button {
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    padding: 15px 15px;
+    margin: 2% 0% 2% 0%;
+}
+
+.delete-request-buttontable {
+    padding: unset;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+
+/*Multi-select*/
+.control-fluid, .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.control-content .control-section {
+    border-width: 0px !important;
+}
+
+.control-section .control-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    min-width: 185px;
+}
+
+.e-bigger .control-section .control-wrapper {
+    width: 100%;
+}
+
+.property-section .right-side {
+    padding-left: 10px;
+}
+
+.property-section .left-side {
+    padding: 5px;
+    width: 25%
+}
+
+.control-styles {
+    padding-top: 30px
+}
+
+.scroll-tablus {
+    height: 100px;
+    overflow-x: auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}

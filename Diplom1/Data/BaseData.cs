@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Diplom1.Models;
@@ -11,7 +12,10 @@ namespace Diplom1.Data
         public static void Initial(AppDbContextData context)
         {
             IEnumerable<Service> GetServ = null;
-            IEnumerable<CargoObject> GetObj;
+            IEnumerable<CargoObject> GetObj = null;
+            List<CargoObject> LObj = new List<CargoObject>();
+            List<Service> SObj = new List<Service>();
+            IEnumerable<Request> GetReq;
             
             if (!context.DBServices.Any())
             {
@@ -67,14 +71,15 @@ namespace Diplom1.Data
                     },
                     new Service
                     {
-                        Name = "Приведение поврежденных рулонов бумаги, картона в транспортабельное состояние, без стоимости материалов",
-                        Posibility = "5",
-                        MeasureType = "рулон",
-                        RubPrice = 755f,
-                        UsdPrice = 10f
+                        Name = "Выгрузка груженого контейнера с платформы и перемещение к месту растарки (на расстояние до 100 м) (медь, цинк, свинец, бумага, картон,   целлюлоза)",
+                        Posibility = "3",
+                        MeasureType = "контейнер",
+                        RubPrice = 3238.95f,
+                        UsdPrice = 42.9f
                     }
                 };
                 GetServ = get1;
+                SObj = get1.ToList();
                 context.DBServices.AddRange(GetServ);
             }
 
@@ -109,6 +114,7 @@ namespace Diplom1.Data
                     }
                 };
                 GetObj = get2;
+                LObj = get2.ToList();
 
                 foreach (CargoObject co in GetObj)
                 {
@@ -116,37 +122,90 @@ namespace Diplom1.Data
                     foreach (Service sr in GetServ)
                     {
                         char[] pars = sr.Posibility.ToCharArray();
-                        for (int i = 0; i < pars.Length - 1; i++)
+                        for (int i = 0; i < pars.Length; i++)
                         {
-                            switch (pars[i])
+
+                            if (co.BackId == int.Parse(pars[i].ToString()))
                             {
-                                case '1':
-                                    if (co.ID == int.Parse(pars[i].ToString()))
-                                        co.PossibleServices.Add(sr);
-                                    break;
-                                case '2':
-                                    if (co.ID == int.Parse(pars[i].ToString()))
-                                        co.PossibleServices.Add(sr);
-                                    break;
-                                case '3':
-                                    if (co.ID == int.Parse(pars[i].ToString()))
-                                        co.PossibleServices.Add(sr);
-                                    break;
-                                case '4':
-                                    if (co.ID == int.Parse(pars[i].ToString()))
-                                        co.PossibleServices.Add(sr);
-                                    break;
-                                case '5':
-                                    if (co.ID == int.Parse(pars[i].ToString()))
-                                        co.PossibleServices.Add(sr);
-                                    break;
+                                co.PossibleServices.Add(sr);
+                                sr.CargoObjects.Add(co);
+                                break;
                             }
                         }
+
+
+                        //    for (int i = 0; i < pars.Length - 1; i++)
+                        //{
+                        //    switch (pars[i])
+                        //    {
+                        //        case '1':
+                        //            if (co.BackId == int.Parse(pars[i].ToString()))
+                        //            {
+                        //                co.PossibleServices.Add(sr);
+                        //                sr.CargoObjects.Add(co);
+                        //            }
+                        //            break;
+                        //        case '2':
+                        //            if (co.BackId == int.Parse(pars[i].ToString()))
+                        //            {
+                        //                co.PossibleServices.Add(sr);
+                        //                sr.CargoObjects.Add(co);
+                        //            }
+                        //            break;
+                        //        case '3':
+                        //            if (co.BackId == int.Parse(pars[i].ToString()))
+                        //            {
+                        //                co.PossibleServices.Add(sr);
+                        //                sr.CargoObjects.Add(co);
+                        //            }
+                        //            break;
+                        //        case '4':
+                        //            if (co.BackId == int.Parse(pars[i].ToString()))
+                        //            {
+                        //                co.PossibleServices.Add(sr);
+                        //                sr.CargoObjects.Add(co);
+                        //            }
+                        //            break;
+                        //        case '5':
+                        //            if (co.BackId == int.Parse(pars[i].ToString()))
+                        //            {
+                        //                co.PossibleServices.Add(sr);
+                        //                sr.CargoObjects.Add(co);
+                        //            }
+                        //            break;
+                        //    }
+                        //}
                     }
                 }
-                context.DBCargo.AddRange(get2);
+                context.DBCargo.AddRange(GetObj);
+                
+            }
+            if (!context.DBRequests.Any())
+            {
+                
+                Collection<CargoObject> test1 = new Collection<CargoObject>();
+                test1.Add(LObj[0]);
+                Collection<Service> test2 = new Collection<Service>();
+                test2.Add(SObj[0]);
+                var get3 = new Request[]
+                {
+                    new Request
+                    {
+                        CargoObj = test1,
+                        Services = test2,
+                        User = "user123",
+                        Status = "ожидает",
+                        CargoAmount = 15,
+                        TotalSumRub = 50000,
+                        TotalSumUsd = 500
+                    }
+                };
+                LObj[0].Reqs.Add(get3[0]);
+                SObj[0].Reqs.Add(get3[0]);
+                GetReq = get3;
+                context.DBRequests.AddRange(GetReq);
                 context.SaveChanges();
-            }   
+            }
         }
     }
 }

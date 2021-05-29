@@ -8,64 +8,71 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Diplom1.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Omu.AwesomeMvc;
 
 namespace Diplom1.Controllers
 {
+    [Authorize(Roles = "user")]
     public class MainPageController : Controller
     {
         private readonly ILogger<MainPageController> _logger;
         AppDbContextData _context;
+        ApplicationDbContext _contIdentity;
+        public TableViewModel TableObj1 = new TableViewModel();
+        private string _curUserName;
+        List<CargoObject> _crg = new List<CargoObject>();
 
-        public MainPageController(ILogger<MainPageController> logger, AppDbContextData context)
+        public MainPageController(ILogger<MainPageController> logger, AppDbContextData context, IHttpContextAccessor httpContextAccessor, ApplicationDbContext contIdentity)
         {
             _logger = logger;
             _context = context;
+            _contIdentity = contIdentity;
+            var getName = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            _curUserName = getName;
         }
 
-        IEnumerable<Request> GetRec
+        public IActionResult MainPage(TableViewModel TbModel, string save, string cancel, string openmodal)
         {
-            get
+            _crg = _context.DBCargo.Include(sa => sa.PossibleServices).ToList();
+            if (!string.IsNullOrEmpty(openmodal))
             {
-                return new List<Request>
-                {
-                    new Request
-                    {
-                        CargoAmount = 10,
-                        Status = "выполняется",
-                        TotalSumRub = 43423,
-                        TotalSumUsd = 3234
-                    },
-                    new Request
-                    {
-                        CargoAmount = 10,
-                        Status = "выполняется",
-                        TotalSumRub = 43423,
-                        TotalSumUsd = 3234
-                    }
-                };
+
             }
-        }
-        //Request ser = new Request()
-        //{
-        //    CargoAmount = 10,
-        //    Status = "выполняется",
-        //    TotalSumRub = 43423,
-        //    TotalSumUsd = 3234
-        //};
 
-        public IActionResult MainPage()
-        {
-            IEnumerable<Request> Requests = GetRec;
-            //Requests.Append(ser);
-
-
-
-
-            var TableObj = new TableViewModel()
+            if (!string.IsNullOrEmpty(save))
             {
-                AllServices = Requests
-            };
-            return View(TableObj);
+                //List<Request> GetRequests = _context.DBRequests.ToList();
+
+                //foreach (Request rq in _context.DBRequests.Include(rq=>rq.CargoObj).Include(rq=>rq.Services))
+                //{
+                //}
+
+            }
+            if (!string.IsNullOrEmpty(cancel))
+            {
+
+            }
+            List<Request> GetRequests = _context.DBRequests.Include(rq => rq.CargoObj).Include(rq => rq.Services).ToList();
+            TbModel.AllRequests = GetRequests;
+            TbModel.CurrUserName = _curUserName;
+            TbModel.AllCargoes = _crg;
+
+            return View("MainPage", TbModel);
+        }
+
+        public IActionResult Popup1()
+        {
+            return PartialView();
+        }
+
+        public IActionResult Index()
+        {
+            var GetCargoes = _context.DBCargo.Include(sa => sa.PossibleServices).ToList();
+            return View(GetCargoes);
         }
     }
 }

@@ -14,5 +14,13 @@ namespace Diplom1.Models
         public string MeasureType { get; set; }
         public float RubPrice { get; set; }
         public float UsdPrice { get; set; }
+
+        public ICollection<CargoObject> CargoObjects { get; set; }
+        public ICollection<Request> Reqs { get; set; }
+        public Service()
+        {
+            CargoObjects = new List<CargoObject>();
+            Reqs = new List<Request>();
+        }
     }
 }

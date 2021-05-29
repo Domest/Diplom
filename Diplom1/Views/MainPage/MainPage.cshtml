@@ -1,5 +1,100 @@
 ﻿@model TableViewModel
 
+<div>
+    @*<form action="" method="post">
+            <input type="submit" name="zhopa" value="Option 1" formaction="MainPage" />
+        </form>*@
+    @*<form>
+            <button name="button" value="first" asp-action="LoadTable">Хуета</button>
+            <button name="button" value="second" asp-action="LoadTable">Суета</button>
+        </form>*@
+    @*@TempData["buttonval"]
+        @TempData.Peek("buttonval")*@
+    <a href="/AddReq/Index" class="">Your button text</a>
+
+    <form asp-controller="MainPage"
+          asp-action="MainPage" method="post">
+        @*@Html.EditorForModel()*@
+        <br />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10">
+                    <button id="btnclick" type="button">Click to add</button>
+                    <div class="modal fade" id="login">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        x
+                                    </button>
+                                    <h4 class="modal-title">Login</h4>
+                                </div>
+                                <div class="modal-body">
+                                    @*<form>*@
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Username" id="usrnametxt" />
+                                        <details>
+                                            <summary>Грузы</summary>
+                                            <table class="scroll-table">
+                                                <thead>
+                                                    <tr><td>Name</td></tr>
+                                                </thead>
+                                                <tbody class="scroll-table-body">
+                                                    @if (Model.AllCargoes.Count > 0)
+                                                    {
+                                                        foreach (var item in Model.AllCargoes)
+                                                        {
+                                                            <tr>
+                                                                <td>@item.Name</td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </details>
+                                    </div>
+                                    <div>
+                                        <input class="form-control" type="password" placeholder="Password" id="passwordtxt" />
+                                    </div>
+                                    @*</form>*@
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="create-request-button" name="openmodal" value="Добавить" />
+                                    <button type="button" id="HidebtnModal" class="btn btn-primary">Hide</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/css/"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnclick").click(function () {
+            $("#login").modal('show');
+        });
+        $("#HidebtnModal").click(function () {
+            $("#login").modal('hide');
+        });
+    });
+</script>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Subjects_dropdown').multiselect();
+        });
+    </script>
+}
+
+
 <div class="scroll-table">
     <table>
         <thead>
@@ -10,47 +105,54 @@
                 <th>Статус</th>
                 <th>Сумма, руб</th>
                 <th>Сумма, доллары США</th>
+                <th></th>
             </tr>
         </thead>
     </table>
     <div class="scroll-table-body">
         <table>
             <tbody>
-                <tr>
-                    <td>Металл</td>
-                    <th>
-                        <details>
-                            <summary>Внимание, спойлер!</summary>
-                            <p>Убийца — дворецкий!</p>
-                            <p>Прокатка металла через что-то там</p>
-                        </details>
-                    </th>
-                    <td>15 т</td>
-                    <td>Выполняется</td>
-                    <td>1488 руб</td>
-                    <td>288 долл</td>
-                </tr>
                 @{
-                    foreach (Request req in Model.AllServices)
+                    if (Model.AllRequests != null)
                     {
-                        <tr>
-                            <td>Алюминий</td>
-                            <th>
-                                <details>
-                                    <summary>Внимание, спойлер!</summary>
-                                    <p>Убийца — дворецкий!</p>
-                                    <p>Прокатка металла через что-то там</p>
-                                </details>
-                            </th>
-                            <td>@req.CargoAmount</td>
-                            <td>@req.Status</td>
-                            <td>@req.TotalSumRub</td>
-                            <td>@req.TotalSumUsd</td>
-                        </tr>
+
+                        foreach (Request req in Model.AllRequests)
+                        {
+                            if (req.User == Model.CurrUserName)
+                            {
+                                <tr>
+                                    <td>
+                                        @foreach (CargoObject co in req.CargoObj)
+                                        {
+                                            <p>@co.Name</p>
+                                        }
+                                    </td>
+                                    <th>
+                                        <details>
+                                            <summary>Услуги:</summary>
+                                            @foreach (Service sr in req.Services)
+                                            {
+                                                <p>@sr.Name</p>
+                                            }
+                                        </details>
+                                    </th>
+                                    <td>@req.CargoAmount</td>
+                                    <td>@req.Status</td>
+                                    <td>@req.TotalSumRub</td>
+                                    <td>@req.TotalSumUsd</td>
+                                    <td>
+                                        <button class="delete-request-buttontable">
+                                            <img src="~/img/delete_button.png" height="100%" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     }
                 }
             </tbody>
         </table>
     </div>
 </div>
+
 
