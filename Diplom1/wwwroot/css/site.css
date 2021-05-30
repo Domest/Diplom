@@ -166,3 +166,168 @@ body {
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
 }
+
+summary {
+    display: block;
+    cursor: pointer;
+    outline: 0;
+}
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+
+.tree-nav__item {
+    display: block;
+    white-space: nowrap;
+    color: black;
+    position: relative;
+}
+
+    .tree-nav__item.is-expandable::before {
+        border-left: 1px solid #333;
+        content: "";
+        height: 100%;
+        left: 0.8rem;
+        position: absolute;
+        top: 2.4rem;
+        height: calc(100% - 2.4rem);
+    }
+
+    .tree-nav__item .tree-nav__item {
+        margin-left: 2.4rem;
+    }
+
+    .tree-nav__item.is-expandable[open] > .tree-nav__item-title::before {
+        font-family: "ionicons";
+        transform: rotate(90deg);
+    }
+
+    .tree-nav__item.is-expandable > .tree-nav__item-title {
+        padding-left: 2.4rem;
+    }
+
+        .tree-nav__item.is-expandable > .tree-nav__item-title::before {
+            position: absolute;
+            will-change: transform;
+            transition: transform 300ms ease;
+            font-family: "ionicons";
+            color: gray;
+            font-size: 1.1rem;
+            content: "\f125";
+            left: 0;
+            display: inline-block;
+            width: 1.6rem;
+            text-align: center;
+        }
+
+.tree-nav__item-title {
+    cursor: pointer;
+    display: block;
+    outline: 0;
+    color: black;
+    font-size: 1.9rem;
+    line-height: 3.2rem;
+    font-weight: 600;
+}
+
+    .tree-nav__item-title .icon {
+        display: inline;
+        padding-left: 1.6rem;
+        margin-right: 0.8rem;
+        color: #666;
+        font-size: 1.4rem;
+        position: relative;
+    }
+
+        .tree-nav__item-title .icon::before {
+            top: 0;
+            position: absolute;
+            left: 0;
+            display: inline-block;
+            width: 1.6rem;
+            text-align: center;
+        }
+
+    .tree-nav__item-title::-webkit-details-marker {
+        display: none;
+    }
+
+.tar {
+    color:black;
+}
+
+.tar:hover{
+    color:lightgray;
+    text-decoration:none;
+    background-color:dimgrey;
+}
+.contacts-div::before {
+    content: '';
+    background-color: #2e6075;
+    /*color: #2e6075;*/
+    height: 2px;
+    display: block;
+}
+.contacts-zag {
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top:5px;
+}
+.contacts-main {
+    height: 500px;
+    overflow: auto;
+    background: #fc8;
+    /* Added CSS */
+    display: flex;
+    flex-flow: column wrap;
+}
+
+
+.outer {
+    height: 800px;
+    overflow: auto;
+    background: #fc8;
+    /* Added CSS */
+    display: flex;
+    flex-flow: column wrap;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 1px 0px 3px 0px;
+    color: #248;
+}
+
+p {
+    font-size: 13px;
+    margin: 2px 0px;
+}
+
+.box {
+    /*background: #def;*/
+    border: none;
+    background-color: #2e6075;
+    /*color: #2e6075;*/
+    height: 2px;
+    padding: 3px 6px;
+    /*border: 2px solid #369;*/
+    margin: 3px 6px;
+    vertical-align: top;
+    width: 250px;
+}
+
+.layout-back {
+    background-color: #36648f;
+}
+.layout-text{
+    color:white;
+}
+.layout-text:hover {
+    color: lightslategray;
+}
+
+.portal-exit{
+    margin-left: 35px;
+}

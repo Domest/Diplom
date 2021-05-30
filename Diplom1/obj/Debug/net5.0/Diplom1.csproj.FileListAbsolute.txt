@@ -182,3 +182,5 @@ C:\Users\Demid\Desktop\GitProj\Diplom1\bin\Debug\net5.0\Omu.AwesomeMvc.xml
 C:\Users\Demid\Desktop\GitProj\Diplom1\bin\Debug\net5.0\Syncfusion.EJ2.dll
 C:\Users\Demid\Desktop\GitProj\Diplom1\bin\Debug\net5.0\Syncfusion.Licensing.dll
 C:\Users\Demid\Desktop\GitProj\Diplom1\obj\Debug\net5.0\Razor\Views\AddReq\Index.cshtml.g.cs
+C:\Users\Demid\Desktop\GitProj\Diplom1\bin\Debug\net5.0\wwwroot\img\exit.png
+C:\Users\Demid\Desktop\GitProj\Diplom1\bin\Debug\net5.0\wwwroot\img\logo_white.png

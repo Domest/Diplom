@@ -9,7 +9,6 @@ namespace Diplom1.Data
 {
     public class AppDbContextData : DbContext
     {
-        
         public AppDbContextData(DbContextOptions<AppDbContextData> options1)
             : base(options1) { }
 
