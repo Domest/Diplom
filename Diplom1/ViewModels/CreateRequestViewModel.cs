@@ -16,5 +16,7 @@ namespace Diplom1.ViewModels
         public List<Service> AllServices { get; set; }
         public List<CheckCargoSer> CheckList { get; set; }
         public int CargoAmount { get; set; }
+
+        public string CargoName { get; set; }
     }
 }

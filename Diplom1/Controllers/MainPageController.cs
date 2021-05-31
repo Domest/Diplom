@@ -38,24 +38,7 @@ namespace Diplom1.Controllers
         public IActionResult MainPage(TableViewModel TbModel, string save, string cancel, string openmodal)
         {
             _crg = _context.DBCargo.Include(sa => sa.PossibleServices).ToList();
-            if (!string.IsNullOrEmpty(openmodal))
-            {
-
-            }
-
-            if (!string.IsNullOrEmpty(save))
-            {
-                //List<Request> GetRequests = _context.DBRequests.ToList();
-
-                //foreach (Request rq in _context.DBRequests.Include(rq=>rq.CargoObj).Include(rq=>rq.Services))
-                //{
-                //}
-
-            }
-            if (!string.IsNullOrEmpty(cancel))
-            {
-
-            }
+            
             List<Request> GetRequests = _context.DBRequests.Include(rq => rq.CargoObj).Include(rq => rq.Services).ToList();
             TbModel.AllRequests = GetRequests;
             TbModel.CurrUserName = _curUserName;
@@ -76,3 +59,23 @@ namespace Diplom1.Controllers
         }
     }
 }
+
+
+//if (!string.IsNullOrEmpty(openmodal))
+//{
+
+//}
+
+//if (!string.IsNullOrEmpty(save))
+//{
+//    //List<Request> GetRequests = _context.DBRequests.ToList();
+
+//    //foreach (Request rq in _context.DBRequests.Include(rq=>rq.CargoObj).Include(rq=>rq.Services))
+//    //{
+//    //}
+
+//}
+//if (!string.IsNullOrEmpty(cancel))
+//{
+
+//}

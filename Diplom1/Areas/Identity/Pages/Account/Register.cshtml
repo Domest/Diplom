@@ -1,8 +1,5 @@
 ﻿@page
 @model RegisterModel
-@{
-    ViewData["Title"] = "Register";
-}
 
 <div class="row">
     <div class="col-md-4">
@@ -33,7 +30,14 @@
             <button type="submit" class="btn btn-primary">Регистрация</button>
         </form>
     </div>
-    @*<div class="col-md-6 col-md-offset-2">
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+@*<div class="col-md-6 col-md-offset-2">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
@@ -63,8 +67,3 @@
             }
         </section>
     </div>*@
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

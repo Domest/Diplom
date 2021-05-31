@@ -1,0 +1,18 @@
+﻿@model ProfileViewModel
+
+<div>
+    <form>
+        <div>
+            <label>Электронная почта пользователя</label>
+            <p>@Model.CurrUserName.</p>
+        </div>
+        <div>
+            <label>Номер телефона</label>
+            <p>@Model.UserPhone</p>
+        </div>
+        <div>
+            <label>Количество всех заявок</label>
+            <p>@Model.AllRequests.Count()</p>
+        </div>
+    </form>
+</div>

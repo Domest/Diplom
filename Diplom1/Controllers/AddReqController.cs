@@ -45,9 +45,11 @@ namespace Diplom1.Controllers
             return View();
         }
 
-        public string zhopa(string value)
+        public string GetSelectedValue(string value)
         {
-            return value + " !";
+            CreReq.CargoName = value;
+            
+            return value;
         }
 
 
