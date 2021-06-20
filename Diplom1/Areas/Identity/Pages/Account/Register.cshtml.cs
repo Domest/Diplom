@@ -49,6 +49,15 @@ namespace Diplom1.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Имя")]
+            public string Name { get; set; }
+            [Required]
+            [Display(Name = "Фамилия")]
+            public string Surname { get; set; }
+            [Required]
+            [Display(Name = "Отчество")]
+            public string Patronymic { get; set; }
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             [StringLength(100, ErrorMessage ="Неправильно введён Email.", MinimumLength = 6)]
@@ -61,7 +70,7 @@ namespace Diplom1.Areas.Identity.Pages.Account
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Подвтердите пароль")]
+            [Display(Name = "Подтвердите пароль")]
             [Compare("Password", ErrorMessage = "Пароли не совпадают")]
             public string ConfirmPassword { get; set; }
 
@@ -69,6 +78,7 @@ namespace Diplom1.Areas.Identity.Pages.Account
             [DataType(DataType.PhoneNumber)]
             [Display(Name ="Номер телефона")]
             public string PhoneNumber { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -83,7 +93,8 @@ namespace Diplom1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
+                string GetUserName = Input.Name + " " + Input.Surname + " " + Input.Patronymic;
+                var user = new IdentityUser { UserName = GetUserName, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
