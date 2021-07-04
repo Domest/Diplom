@@ -10,12 +10,16 @@
         </form>*@
     @*@TempData["buttonval"]
         @TempData.Peek("buttonval")*@
-    <a href="/AddReq/Index" class="">Your button text</a>
 
-    <form asp-controller="MainPage"
-          asp-action="MainPage" method="post">
+
+    @*<a href="/AddReq/Index" class="">Your button text</a>*@
+
+    <a class="btn btn-primary button-marg" href="/AddReq/Index">Создать новую заявку</a>
+
+    <!--<form asp-controller="MainPage"
+          asp-action="MainPage" method="post">-->
         @*@Html.EditorForModel()*@
-        <br />
+        <!--<br />
 
         <div class="container">
             <div class="row">
@@ -68,7 +72,7 @@
             </div>
         </div>
     </form>
-</div>
+</div>-->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -111,6 +115,7 @@
         <table>
             <tbody>
                 @{
+                    string SvgPath = null;
                     if (Model.AllRequests != null)
                     {
 
@@ -135,7 +140,25 @@
                                         </details>
                                     </th>
                                     <td>@req.CargoAmount</td>
-                                    <td>@req.Status</td>
+                                    <td>
+                                        @switch (req.Status)
+                                        {
+                                            case "Ожидает":
+                                                SvgPath = "~/img/gray.svg";
+                                                break;
+                                            case "Исполняется":
+                                                SvgPath = "~/img/yellow.svg";
+                                                break;
+                                            case "Отменена":
+                                                SvgPath = "~/img/red.svg";
+                                                break;
+                                            case "Выполнено":
+                                                SvgPath = "~/img/green.svg";
+                                                break;
+                                        }
+                                        <img src="@Url.Content(SvgPath)" height="15px" width="15px">
+                                        @req.Status
+                                    </td>
                                     <td>@req.TotalSumRub</td>
                                     <td>@req.TotalSumUsd</td>
                                     <td>

@@ -12,8 +12,12 @@ namespace Diplom1.ViewModels
         public IEnumerable<Request> AllRequests { get; set; }
         public string CurrUserName { get; set; }
         public List<SelectListItem> AllCargoes { get; set; }
+        public int[] CargoIDs { get; set; }
+        public List<SelectListItem> AllServices { get; set; }
+        public int[] ServiceIDs { get; set; }
+
         public List<CargoObject> AllCargoes1 { get; set; }
-        public List<Service> AllServices { get; set; }
+        //public List<Service> AllServices { get; set; }
         public List<CheckCargoSer> CheckList { get; set; }
         public int CargoAmount { get; set; }
 

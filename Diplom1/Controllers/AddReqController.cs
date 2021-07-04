@@ -30,36 +30,107 @@ namespace Diplom1.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string value)
-        {
-            List<UserM> users = new List<UserM>
-            {
-                new UserM {Id=1, Name="Tom", Age=35 },
-                new UserM {Id=2, Name="Alice", Age=29 },
-                new UserM {Id=3, Name="Sam", Age=36 },
-                new UserM {Id=4, Name="Bob", Age=31 },
-            };
-            List<CargoObject> getcargo = _context.DBCargo.ToList();
+        //public IActionResult Index(string value)
+        //{
+        //    List<CargoObject> getcargo = _context.DBCargo.ToList();
 
-            ViewBag.Users = new SelectList(getcargo, "ID", "Name");
-            return View();
+        //    ViewBag.Users = new SelectList(getcargo, "ID", "Name");
+        //    return View();
+        //}
+
+        //public string GetSelectedValue(string value)
+        //{
+        //    CreReq.CargoName = value;
+
+        //    return value;
+        //}
+
+
+        //[HttpPost]
+        //public ActionResult Index(CreateRequestViewModel MV, IFormCollection form)
+        //{
+        //    string strDDLValue = form["userid"].ToString();
+
+        //    return View(MV);
+        //}
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+        public IActionResult Index()
+        {
+            List<CargoObject> getcargo = _context.DBCargo.ToList();
+            CreReq.AllCargoes1 = getcargo;
+            CreReq.AllCargoes = BindList();
+            CreReq.AllServices = new List<SelectListItem>();
+            CreReq.AllServices.Add(new SelectListItem() { Text= "Дополнительные работы при выгрузке, с нарушением укладки груза в вагоне", Value="0"});
+            CreReq.AllServices.Add(new SelectListItem() { Text = "Приведение бухт катанки в транспортабельное состояние, без стоимости материалов", Value = "1" });
+
+            return View(CreReq);
+        }
+        [HttpPost]
+        public IActionResult Index(CreateRequestViewModel crv)
+        {
+            crv.AllCargoes = BindList();
+            if (crv.CargoIDs != null)
+            {
+                List<SelectListItem> selectedItems = crv.AllCargoes.Where(p => crv.CargoIDs.Contains(int.Parse(p.Value))).ToList();
+            }
+            return View(crv);
         }
 
-        public string GetSelectedValue(string value)
+        public List<SelectListItem> BindList()
         {
-            CreReq.CargoName = value;
-            
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<CargoObject> crg = new List<CargoObject>();
+            crg = _context.DBCargo.ToList();
+            foreach (CargoObject co in crg)
+            {
+                list.Add(new SelectListItem() {Text = co.Name, Value = co.ID.ToString() });
+            }
+            return list;
+        }
+        public List<SelectListItem> BindServ()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Service> srv = new List<Service>();
+            srv = _context.DBServices.ToList();
+            List<CargoObject> GetCargo = _context.DBCargo.Include(m => m.PossibleServices).ToList();
+
+            foreach (CargoObject co in GetCargo)
+            {
+                for (int i = 0; i < CreReq.CargoIDs.Count(); i++)
+                {
+                    if (CreReq.CargoIDs[i] == co.ID)
+                    {
+                        foreach (Service gsrv in co.PossibleServices)
+                        {
+                            bool IsExist = list.Any(item => item.Text == gsrv.Name);
+                            if(IsExist != true)
+                                list.Add(new SelectListItem() { Value = gsrv.ID.ToString(), Text = gsrv.Name});
+                        }
+                    }
+                }
+            }
+            //var bruh = _context.DBServices;
+            //foreach (var sr in srv)
+            //{
+            //    sr.CargoObjects?.Name
+            //}
+
+            return list;
+        }
+        public string LoadServices(string value)
+        {
+            CreReq.AllServices = new List<SelectListItem>();
+            CreReq.ServiceIDs = null;
+            //CreReq.AllServices = BindServ();
+            CreReq.CargoIDs = null;
             return value;
         }
 
 
-        [HttpPost]
-        public ActionResult Index(CreateRequestViewModel MV, FormCollection form)
-        {
-            string strDDLValue = form["userid"].ToString();
-
-            return View(MV);
-        }
 
         //public IActionResult Index()
         //{

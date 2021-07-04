@@ -13960,11 +13960,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Demid\\Desktop\\GitProj\\Diplom1\\Diplom1.csproj",
+      "projectUniqueName": "C:\\Users\\Demid\\Desktop\\Diplom-133db33997cb74df6c042480af21c02c60829c5a\\Diplom1\\Diplom1.csproj",
       "projectName": "Diplom1",
-      "projectPath": "C:\\Users\\Demid\\Desktop\\GitProj\\Diplom1\\Diplom1.csproj",
+      "projectPath": "C:\\Users\\Demid\\Desktop\\Diplom-133db33997cb74df6c042480af21c02c60829c5a\\Diplom1\\Diplom1.csproj",
       "packagesPath": "C:\\Users\\Demid\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Demid\\Desktop\\GitProj\\Diplom1\\obj\\",
+      "outputPath": "C:\\Users\\Demid\\Desktop\\Diplom-133db33997cb74df6c042480af21c02c60829c5a\\Diplom1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

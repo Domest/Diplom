@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9W9/BlusTO616qLVbH0hNoxCuZoU5d3PwFDdS5Zck6JOJTJ6bL36SsZ5X3PSLaF3yfrFMqDra6+/awwv8683ig==",
+  "dgSpecHash": "1UWrOevLKD10zgvLKEq1AIYTh8TdH3EI4bluS2NheHJwO35pjwN13cVN3cz4qgy2VbOR9B4DjIOAsLQsTmxdKQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Demid\\Desktop\\GitProj\\Diplom1\\Diplom1.csproj",
+  "projectFilePath": "C:\\Users\\Demid\\Desktop\\Diplom-133db33997cb74df6c042480af21c02c60829c5a\\Diplom1\\Diplom1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Demid\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Demid\\.nuget\\packages\\jquery\\1.4.4\\jquery.1.4.4.nupkg.sha512",

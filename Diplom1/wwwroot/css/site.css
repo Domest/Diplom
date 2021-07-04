@@ -77,6 +77,7 @@ body {
     margin-top: 0px;
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
+    overflow-y: overlay;
 }
 
 .scroll-table table {
@@ -336,4 +337,19 @@ p {
 /*таблица*/
 .button-marg{
     margin-bottom:10px;
+}
+
+
+/*профиль*/
+.inline{
+    display:inline-block;
+}
+
+/*круг*/
+.circle-status {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    /*display: inline-block;*/
 }

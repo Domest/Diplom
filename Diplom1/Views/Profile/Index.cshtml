@@ -3,16 +3,28 @@
 <div>
     <form>
         <div>
-            <label>Электронная почта пользователя</label>
-            <p>@Model.CurrUserName.</p>
+            <div class="inline">
+                <label>Электронная почта пользователя</label>
+            </div>
+            <div class="inline">
+                <p>@Model.CurrUserName.</p>
+            </div>
         </div>
         <div>
-            <label>Номер телефона</label>
-            <p>@Model.UserPhone</p>
+            <div class="inline">
+                <label>Номер телефона</label>
+            </div>
+            <div class="inline">
+                <p>@Model.UserPhone</p>
+            </div>
         </div>
         <div>
-            <label>Количество всех заявок</label>
-            <p>@Model.AllRequests.Count()</p>
+            <div class="inline">
+                <label>Количество всех заявок</label>
+            </div>
+            <div class="inline">
+                <p>@Model.AllRequests.Count()</p>
+            </div>
         </div>
     </form>
 </div>
